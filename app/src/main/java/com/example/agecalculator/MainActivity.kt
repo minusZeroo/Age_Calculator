@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.materialIcon
 import androidx.compose.runtime.Composable
@@ -32,11 +33,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppBar(title: String){
-    TopAppBar(title = { Text(text = "AppBar", color = Color.White)}, navigationIcon = { IconButton(
-        onClick = { /*TODO*/ }) {
-
-    }})
+fun AppBar(){
+    TopAppBar(title = { Text(text = "Age Calculator", color = Color.LightGray)}, elevation = 4.dp)
 
 }
 
@@ -45,10 +43,12 @@ fun AppBar(title: String){
 @Composable
 fun MainScreen(){
 
-   Surface(color = Color.LightGray,
-        modifier = Modifier.fillMaxSize()) {
+    Scaffold(topBar = { AppBar()}) {
 
-        
+
+
+   Surface(color = MaterialTheme.colors.background,
+        modifier = Modifier.fillMaxSize()) {
 
 
         Column (modifier = Modifier
@@ -59,19 +59,19 @@ fun MainScreen(){
             val mytext = remember { mutableStateOf(TextFieldValue()) }
             TextField(value = mytext.value,  onValueChange = { mytext.value}, label = {Text("enter year of birth")})
 
-            //Surface(color = Color.LightGray, modifier = Modifier.wrapContentSize()) {
                 Button(
                     onClick = { /*TODO*/ },
-                    shape = MaterialTheme.shapes.medium,
-                    border = BorderStroke(
-                        width = 4.dp,
-                        brush = SolidColor(Color.Red))
+                    colors = ButtonDefaults.textButtonColors(backgroundColor = Color.Transparent),
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                    //border = BorderStroke(
+                        //width = 2.dp,
+                        //brush = SolidColor(Color.Red))
                 ) {
                     Text("Calculate Age")
-
                 }
-            //}
-        }
+            }
+       }
    }
 }
 
